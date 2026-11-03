@@ -1,0 +1,10 @@
+---
+title: "Author email accessibility"
+author:
+  - name: Jane Doe
+    email: jane@example.org
+  - name: Sam Lee
+    email: sam@example.org
+---
+
+Content.

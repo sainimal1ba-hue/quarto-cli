@@ -1,9 +1,8 @@
 /*
-* render-title-block.test.ts
-*
-* Copyright (C) 2020-2022 Posit Software, PBC
-*
-*/
+ * render-title-block.test.ts
+ *
+ * Copyright (C) 2020-2022 Posit Software, PBC
+ */
 
 import { docs, outputForInput } from "../../utils.ts";
 import {
@@ -22,6 +21,18 @@ testRender(input, "html", false, [
     "div.quarto-categories",
     "div.quarto-title-meta",
   ], []),
+]);
+
+// Author email icon links must have an accessible name (#15166).
+const emailInput = docs("doc-layout/title-block-email.qmd");
+const emailOutput = outputForInput(emailInput, "html");
+
+testRender(emailInput, "html", false, [
+  ensureFileRegexMatches(emailOutput.outputPath, [
+    /href="mailto:jane@example.org" class="quarto-title-author-email" aria-label="Email Jane Doe"/,
+    /href="mailto:sam@example.org" class="quarto-title-author-email" aria-label="Email Sam Lee"/,
+    /class="bi bi-envelope" aria-hidden="true"/,
+  ]),
 ]);
 
 const noneInput = docs("doc-layout/title-block-none.qmd");
